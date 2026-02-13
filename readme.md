@@ -3,7 +3,7 @@
 PSLTasks es una API REST para la gestión de proyectos y tareas, inspirada en un sistema tipo Trello simplificado. 
 Permite manejar usuarios, proyectos y tareas, desarrollada con **Spring Boot** y **PostgreSQL**, con entorno de pruebas **H2**, documentación con **Swagger** y pruebas unitarias con **JUnit**.
 
-## Tecnologías
+## Stack Tecnológico
 
 - **Backend:** Java 21 (LTS), Spring Boot, Spring Web, Spring Data JPA
 - **Base de datos:** PostgreSQL (entorno producción), H2 (entorno desarrollo/testing)
@@ -22,17 +22,6 @@ Demostrar:
 * Uso correcto de JPA y relaciones
 * Documentación profesional de API
 
-## Stack Tecnológico
-
-- Java 21 (LTS)
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- PostgreSQL (entorno producción)
-- H2 Database (entorno desarrollo/testing)
-- Swagger / OpenAPI
-- JUnit 5
-- Gradle
 
 ## Arquitectura
 
@@ -100,7 +89,6 @@ src
 
 
 
-
 ## Configuración y Ejecución
 
 El proyecto utiliza perfiles de Spring para separar entornos:
@@ -113,9 +101,12 @@ El proyecto utiliza perfiles de Spring para separar entornos:
 
 El perfil `dev` utiliza una base de datos en memoria H2, ideal para pruebas rápidas y desarrollo local.
 
-#### Desde un IDE (IntelliJ recomendado)
-
-1. Abrir el proyecto.
+### Ejecución
+0. Clonar el repositorio
+```bash
+git clone <https://github.com/pierosantana/psltasks.git>
+```
+1. Abrir el proyecto desde un IDE (IntelliJ recomendado).
 2. Esperar a que Gradle descargue las dependencias.
 3. Configurar el perfil activo como `dev` (si no está definido por defecto).
 4. Ejecutar la clase principal `PslTasksApplication`.
@@ -125,8 +116,6 @@ El perfil `dev` utiliza una base de datos en memoria H2, ideal para pruebas ráp
 ```bash
 ./gradlew bootRun --args='--spring.profiles.active=dev'
 ````
-
-
 
 ### Entorno Producción (PostgreSQL)
 
@@ -145,8 +134,6 @@ spring.jpa.hibernate.ddl-auto=update
 ./gradlew bootRun --args='--spring.profiles.active=prod'
 ```
 
----
-
 ## Documentación API
 
 Swagger disponible en:
@@ -154,8 +141,6 @@ Swagger disponible en:
 ```
 http://localhost:8080/swagger-ui.html
 ```
-
----
 
 ## Testing
 
@@ -166,8 +151,6 @@ Ejecutar tests:
 ```bash
 ./gradlew test
 ```
-
-
 
 ## Posibles mejoras
 
