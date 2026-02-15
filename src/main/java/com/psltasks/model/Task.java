@@ -2,8 +2,6 @@ package com.psltasks.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "tasks")
 public class Task {
@@ -12,6 +10,7 @@ public class Task {
     private Long id;
     private String title;
     private String description;
+    @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
     @ManyToOne
