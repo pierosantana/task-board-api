@@ -7,8 +7,6 @@ Permite manejar usuarios, proyectos y tareas, desarrollada con **Spring Boot** y
 
 - **Backend:** Java 21 (LTS), Spring Boot, Spring Web, Spring Data JPA
 - **Base de datos:** PostgreSQL (entorno producción), H2 (entorno desarrollo)
-- **Documentación API:** 
-- **Pruebas:** 
 - **Build Tool:** Gradle
 - **Control de versiones:** Git
 
@@ -22,29 +20,44 @@ Demostrar:
 * Uso correcto de JPA y relaciones
 * Documentación profesional de API
 
-
 ## Arquitectura
-
 ```
-
 src
 ├── main
-│   ├── java/com/psltasks
-│   │   ├── config       # Configuraciones de la aplicación
-│   │   ├── controller   # Exposición de endpoints REST
-│   │   ├── exception    # Manejo de errores
-│   │   ├── model        # Entidades: User, Project, Task
-│   │   ├── repository   # Acceso a datos con JPA
-│   │   ├── service      # Lógica de negocio
-│   └── resources
-│       ├── application-dev.properties  # Entorno de desarrollo
-│       ├── application-prod.properties # Entorno de producción
-│       ├── application.properties
-│       ├── static
-│       └── templates
+│   ├── java
+│   │   └── com
+│   │       └── psltasks
+│   │           ├── PslTasksApplication.java
+│   │           ├── config       # Configuraciones de la aplicación
+│   │           │   └── CorsConfig.java
+│   │           ├── controller   # Exposición de endpoints REST
+│   │           │   ├── ProjectController.java
+│   │           │   ├── TaskController.java
+│   │           │   └── UserController.java
+│   │           ├── exception   # Manejo de errores
+│   │           │   ├── GlobalExceptionHandler.java
+│   │           │   └── ResourceNotFoundException.java
+│   │           ├── model       # Entidades: User, Project, Task
+│   │           │   ├── Project.java
+│   │           │   ├── Task.java
+│   │           │   ├── TaskStatus.java
+│   │           │   └── User.java
+│   │           ├── repository  # Acceso a datos con JPA
+│   │           │   ├── ProjectRepository.java
+│   │           │   ├── TaskRepository.java
+│   │           │   └── UserRepository.java
+│   │           ├── service     # Lógica de negocio
+│   │           │   ├── ProjectService.java
+│   │           │   ├── TaskService.java
+│   │           │   └── UserService.java
+│   │           └── util
+│   └── resources
+│       ├── application-dev.properties  # Entorno de desarrollo
+│       ├── application-prod.properties # Entorno de producción
+│       └── application.properties
 └── test
-└── java/com/psltasks
-└── PslTasksApplicationTests.java
+    └── java/com/psltasks
+                    └── PslTasksApplicationTests.java
 ```
 
 ## Modelo de datos
@@ -126,8 +139,8 @@ git clone <https://github.com/pierosantana/psltasks.git>
 
 ## Proximas mejoras
 
-* Documentación API
-* Testing JUnit 5
+* Documentación API: Swagger 
+* Testing: JUnit 5
 
 
 
