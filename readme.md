@@ -1,14 +1,14 @@
 # PSLTasks API
 
-PSLTasks es una API REST para la gestión de proyectos y tareas, inspirada en un sistema tipo Trello simplificado. 
-Permite manejar usuarios, proyectos y tareas, desarrollada con **Spring Boot** y **PostgreSQL**, con entorno de pruebas **H2**, documentación con **Swagger** y pruebas unitarias con **JUnit**.
+PSLTasks es una API REST sencilla para la gestión de proyectos y tareas, inspirada en un sistema tipo Trello. 
+Permite manejar usuarios, proyectos y tareas, desarrollada con **Spring Boot** y **PostgreSQL**, con entorno de pruebas **H2**.
 
 ## Stack Tecnológico
 
 - **Backend:** Java 21 (LTS), Spring Boot, Spring Web, Spring Data JPA
-- **Base de datos:** PostgreSQL (entorno producción), H2 (entorno desarrollo/testing)
-- **Documentación API:** Swagger / OpenAPI
-- **Pruebas:** JUnit 5
+- **Base de datos:** PostgreSQL (entorno producción), H2 (entorno desarrollo)
+- **Documentación API:** 
+- **Pruebas:** 
 - **Build Tool:** Gradle
 - **Control de versiones:** Git
 
@@ -35,9 +35,7 @@ src
 │   │   ├── exception    # Manejo de errores
 │   │   ├── model        # Entidades: User, Project, Task
 │   │   ├── repository   # Acceso a datos con JPA
-│   │   ├── security     # (Preparado para futura implementación JWT)
 │   │   ├── service      # Lógica de negocio
-│   │   └── util         # Utilidades
 │   └── resources
 │       ├── application-dev.properties  # Entorno de desarrollo
 │       ├── application-prod.properties # Entorno de producción
@@ -53,10 +51,9 @@ src
 
 - **User**
     - id: Long
-    - username: String
+    - name: String
     - email: String
-    - password: String
-    - roles: Set<Role>
+    - projects: List<projects>
 
 - **Project**
     - id: Long
@@ -71,21 +68,25 @@ src
     - description: String
     - status: Enum (TODO, IN_PROGRESS, DONE)
     - project: Project
-    - assignedTo: User
 
 ## Endpoints Principales
 
-| Método | Ruta                     | Descripción                  |
-|--------|--------------------------|-----------------------------|
-| GET    | /api/users               | Listar usuarios             |
-| POST   | /api/users               | Crear usuario               |
-| GET    | /api/projects            | Listar proyectos            |
-| POST   | /api/projects            | Crear proyecto              |
-| GET    | /api/projects/{id}       | Obtener proyecto por ID     |
-| GET    | /api/tasks               | Listar tareas               |
-| POST   | /api/tasks               | Crear tarea                 |
-| PUT    | /api/tasks/{id}          | Actualizar tarea            |
-| DELETE | /api/tasks/{id}          | Eliminar tarea              |
+| Método  | Ruta                 | Descripción                 |
+|---------|----------------------|-----------------------------|
+| GET     | /users               | Listar usuarios             |
+| GET     | /users/{id}          | Obtener usuario por ID      |
+| POST    | /users               | Crear usuario               |
+| PUT     | /users/{id}          | Actualizar usuario por ID   |
+| DELETE  | /users/{id}          | Eliminar usuario por ID     |
+| GET     | /projects            | Listar proyectos            |
+| GET     | /projects/{id}       | Obtener proyecto por ID     |
+| POST    | /projects            | Crear proyecto              |
+| PUT     | /projects/{id}       | Actualizar proyecto por ID  |
+| GET     | /tasks               | Listar tareas               |
+| GET     | /tasks{id}           | Listar tareas por ID        |
+| POST    | /tasks               | Crear tarea                 |
+| PUT     | /tasks/{id}          | Actualizar tarea por ID     |
+| DELETE  | /tasks/{id}          | Eliminar tarea por ID       |
 
 
 
@@ -101,21 +102,6 @@ El proyecto utiliza perfiles de Spring para separar entornos:
 
 El perfil `dev` utiliza una base de datos en memoria H2, ideal para pruebas rápidas y desarrollo local.
 
-### Ejecución
-0. Clonar el repositorio
-```bash
-git clone <https://github.com/pierosantana/psltasks.git>
-```
-1. Abrir el proyecto desde un IDE (IntelliJ recomendado).
-2. Esperar a que Gradle descargue las dependencias.
-3. Configurar el perfil activo como `dev` (si no está definido por defecto).
-4. Ejecutar la clase principal `PslTasksApplication`.
-
-#### Desde línea de comandos
-
-```bash
-./gradlew bootRun --args='--spring.profiles.active=dev'
-````
 
 ### Entorno Producción (PostgreSQL)
 
@@ -127,38 +113,21 @@ spring.datasource.username=app_user
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
 ```
-
-#### Ejecutar con perfil producción
-
+### Ejecución
+0. Clonar repositorio
 ```bash
-./gradlew bootRun --args='--spring.profiles.active=prod'
+git clone <https://github.com/pierosantana/psltasks.git>
 ```
+1. Abrir el proyecto desde un IDE (IntelliJ recomendado)
+2. Esperar a que Gradle descargue las dependencias
+3. Configurar el perfil activo como `dev` o `prod` (si no está definido por defecto)
+4. Ejecutar la clase principal `PslTasksApplication`
 
-## Documentación API
 
-Swagger disponible en:
+## Proximas mejoras
 
-```
-http://localhost:8080/swagger-ui.html
-```
-
-## Testing
-
-Las pruebas unitarias están implementadas con JUnit 5.
-
-Ejecutar tests:
-
-```bash
-./gradlew test
-```
-
-## Posibles mejoras
-
-* Implementación completa de seguridad con JWT
-* Paginación y filtros avanzados
-* Tests de integración con @SpringBootTest
-* Dockerización del proyecto
-* CI/CD
+* Documentación API
+* Testing JUnit 5
 
 
 
