@@ -1,9 +1,9 @@
 package com.psltasks.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,9 +14,11 @@ public class User {
     private String name;
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_project",

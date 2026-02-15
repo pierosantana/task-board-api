@@ -1,5 +1,6 @@
 package com.psltasks.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,9 +16,11 @@ public class Project {
     private String name;
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
     private List<Task> tasks;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "projects")
     private List<User> users;
 
