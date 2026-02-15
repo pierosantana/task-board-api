@@ -7,7 +7,7 @@ import com.psltasks.model.TaskStatus;
 import com.psltasks.model.User;
 import com.psltasks.repository.ProjectRepository;
 import com.psltasks.repository.TaskRepository;
-import com.psltasks.repository.UserCrudRepository;
+import com.psltasks.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final UserCrudRepository userRepository;
+    private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
 
-    public TaskService(TaskRepository taskRepository, UserCrudRepository userRepository, ProjectRepository projectRepository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;

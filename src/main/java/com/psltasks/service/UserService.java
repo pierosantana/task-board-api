@@ -2,7 +2,7 @@ package com.psltasks.service;
 
 import com.psltasks.exception.ResourceNotFoundException;
 import com.psltasks.model.User;
-import com.psltasks.repository.UserCrudRepository;
+import com.psltasks.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final UserCrudRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserService(UserCrudRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
