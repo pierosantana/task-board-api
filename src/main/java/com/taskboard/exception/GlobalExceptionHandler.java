@@ -1,4 +1,4 @@
-package com.psltasks.exception;
+package com.taskboard.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

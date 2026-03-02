@@ -1,4 +1,4 @@
-package com.psltasks.exception;
+package com.taskboard.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
