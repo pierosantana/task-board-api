@@ -1,6 +1,6 @@
-package com.psltasks.model;
+package com.taskboard.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,20 +16,20 @@ public class Project {
     private String name;
     private String description;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Task> tasks;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "projects")
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private User owner;
 
-    public List<User> getUsers() {
-        return users;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public Project(String name, String description) {

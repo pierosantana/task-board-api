@@ -1,10 +1,10 @@
-package com.psltasks;
+package com.taskboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PslTasksApplicationTests {
+class TaskBoardApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,9 +1,10 @@
-package com.psltasks.controller;
+package com.taskboard.controller;
 
-import com.psltasks.model.Task;
-import com.psltasks.service.TaskService;
+import com.taskboard.model.Task;
+import com.taskboard.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+ 
 
 import java.util.List;
 
@@ -15,6 +16,11 @@ public class TaskController {
 
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
+    }
+
+    @PutMapping("/{taskId}/project/{projectId}")
+    public Task moveTaskToProject(@PathVariable Long taskId, @PathVariable Long projectId) {
+        return taskService.moveToProject(taskId, projectId);
     }
 
     @GetMapping
@@ -38,4 +44,7 @@ public class TaskController {
     public void deleteTask(@PathVariable Long id) {
         taskService.delete(id);
     }
+
+
+
 }

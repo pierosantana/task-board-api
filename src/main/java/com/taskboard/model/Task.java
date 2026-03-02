@@ -1,5 +1,6 @@
-package com.psltasks.model;
+package com.taskboard.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,11 +15,8 @@ public class Task {
     private TaskStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "project_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Project project;
 
     public Task(String title, String description) {
@@ -60,14 +58,6 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Project getProject() {
