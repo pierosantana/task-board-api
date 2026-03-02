@@ -1,6 +1,6 @@
-# PSLTasks API
+# Task-board-api
 
-PSLTasks es una API REST sencilla para la gestión de proyectos y tareas, inspirada en un sistema tipo Trello. 
+Taskboard es una API REST sencilla para la gestión de proyectos y tareas, inspirada en un sistema tipo Trello. 
 Permite manejar usuarios, proyectos y tareas, desarrollada con **Spring Boot** y **PostgreSQL**, con entorno de pruebas **H2**.
 
 ## Stack Tecnológico
@@ -26,8 +26,8 @@ src
 ├── main
 │   ├── java
 │   │   └── com
-│   │       └── psltasks
-│   │           ├── PslTasksApplication.java
+│   │       └── taskboard
+│   │           ├── TaskBoardApplication.java
 │   │           ├── config       # Configuraciones de la aplicación
 │   │           │   └── CorsConfig.java
 │   │           ├── controller   # Exposición de endpoints REST
@@ -55,9 +55,7 @@ src
 │       ├── application-dev.properties  # Entorno de desarrollo
 │       ├── application-prod.properties # Entorno de producción
 │       └── application.properties
-└── test
-    └── java/com/psltasks
-                    └── PslTasksApplicationTests.java
+
 ```
 
 ## Modelo de datos
@@ -121,7 +119,7 @@ El perfil `dev` utiliza una base de datos en memoria H2, ideal para pruebas ráp
 Configurar `application-prod.properties`:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/app_bd
+spring.datasource.url=jdbc:postgresql://localhost:5432/taskboard_db
 spring.datasource.username=app_user
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
@@ -129,12 +127,12 @@ spring.jpa.hibernate.ddl-auto=update
 ### Ejecución
 0. Clonar repositorio
 ```bash
-git clone <https://github.com/pierosantana/psltasks.git>
+git clone <https://github.com/pierosantana/task-board-api.git>
 ```
 1. Abrir el proyecto desde un IDE (IntelliJ recomendado)
 2. Esperar a que Gradle descargue las dependencias
-3. Configurar el perfil activo como `dev` o `prod` (si no está definido por defecto)
-4. Ejecutar la clase principal `PslTasksApplication`
+3. Configurar el perfil activo como `dev` o `prod` (dev está definido por defecto)
+4. Ejecutar la clase principal `TaskBoardApplication`
 
 
 ## Proximas mejoras
