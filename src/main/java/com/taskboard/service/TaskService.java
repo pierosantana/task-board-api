@@ -1,13 +1,12 @@
-package com.psltasks.service;
+package com.taskboard.service;
 
-import com.psltasks.exception.ResourceNotFoundException;
-import com.psltasks.model.Project;
-import com.psltasks.model.Task;
-import com.psltasks.model.TaskStatus;
-import com.psltasks.model.User;
-import com.psltasks.repository.ProjectRepository;
-import com.psltasks.repository.TaskRepository;
-import com.psltasks.repository.UserRepository;
+import com.taskboard.exception.ResourceNotFoundException;
+import com.taskboard.model.Project;
+import com.taskboard.model.Task;
+import com.taskboard.model.TaskStatus;
+import com.taskboard.repository.ProjectRepository;
+import com.taskboard.repository.TaskRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +15,10 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository) {
+    public TaskService(TaskRepository taskRepository, ProjectRepository projectRepository) {
         this.taskRepository = taskRepository;
-        this.userRepository = userRepository;
         this.projectRepository = projectRepository;
     }
 
@@ -37,6 +34,25 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public Task createForProject(Long projectId, Task task) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto no encontrado con id: " + projectId));
+        if (task.getStatus() == null) {
+            task.setStatus(TaskStatus.TODO);
+        }
+        task.setProject(project);
+        return taskRepository.save(task);
+    }
+
+    public Task moveToProject(Long taskId, Long projectId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException("Tarea no encontrada con id: " + taskId));
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto no encontrado con id: " + projectId));
+        task.setProject(project);
+        return taskRepository.save(task);
+    }
+
     public Task update(Long id, Task updatedTask) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tarea no encontrada con id: " + id));
@@ -44,13 +60,6 @@ public class TaskService {
         existingTask.setTitle(updatedTask.getTitle());
         existingTask.setDescription(updatedTask.getDescription());
         existingTask.setStatus(updatedTask.getStatus());
-
-        if (updatedTask.getUser() != null) {
-            Long userId = updatedTask.getUser().getId();
-            User user = userRepository.findById(userId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + userId));
-            existingTask.setUser(user);
-        }
 
         if (updatedTask.getProject() != null) {
             Long projectId = updatedTask.getProject().getId();
@@ -69,13 +78,6 @@ public class TaskService {
     }
 
     private void hydrateRelations(Task task) {
-        if (task.getUser() != null) {
-            Long userId = task.getUser().getId();
-            User user = userRepository.findById(userId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + userId));
-            task.setUser(user);
-        }
-
         if (task.getProject() != null) {
             Long projectId = task.getProject().getId();
             Project project = projectRepository.findById(projectId)

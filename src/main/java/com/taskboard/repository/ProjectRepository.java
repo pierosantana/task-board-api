@@ -1,6 +1,6 @@
-package com.psltasks.repository;
+package com.taskboard.repository;
 
-import com.psltasks.model.Project;
+import com.taskboard.model.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {

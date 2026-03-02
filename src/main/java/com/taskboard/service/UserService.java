@@ -1,8 +1,8 @@
-package com.psltasks.service;
+package com.taskboard.service;
 
-import com.psltasks.exception.ResourceNotFoundException;
-import com.psltasks.model.User;
-import com.psltasks.repository.UserRepository;
+import com.taskboard.exception.ResourceNotFoundException;
+import com.taskboard.model.User;
+import com.taskboard.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

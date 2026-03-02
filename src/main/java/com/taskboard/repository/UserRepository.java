@@ -1,7 +1,7 @@
-package com.psltasks.repository;
+package com.taskboard.repository;
 
 
-import com.psltasks.model.User;
+import com.taskboard.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
